@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Biodata Form</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { text-align: center; padding: 20px; background: white; box-shadow: 0 0 10px black; }
+        input, select, textarea, button { width: 80%; padding: 8px; margin: 5px 0; }
+        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Bio-Data</h1>
+        <form onsubmit="success(); return false;"> 
+            <label>Name:</label><br>
+            <input type="text" name="text" required><br>
+            
+            <label>DOB:</label><br>
+            <input type="date" name="dob" required><br>
+            
+            <label>Email:</label><br>
+            <input type="text" name="email" required><br>
+            
+            <label>Mobile:</label><br>
+            <input type="number" name="mobile" required><br>
+            
+            <label>Gender:</label><br>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+            
+            <label>Address:</label><br>
+            <textarea name="address" required></textarea><br>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        function success() {
+            alert("Data submitted successfully");
+        }
+    </script>
+</body>
+</html>
