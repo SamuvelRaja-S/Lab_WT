@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calendar</title>
+</head>
+<body>
+    <h2>Enter Year to Generate Calendar</h2>
+    <input type="number" id="yearInput" placeholder="Enter Year">
+    <button onclick="generateCalendar()">Show Calendar</button>
+    <pre id="calendar"></pre>
+
+    <script>
+        function generateCalendar() {
+            let year = document.getElementById('yearInput').value;
+            if (!year) return;
+            let calendar = '';
+            for (let month = 0; month < 12; month++) {
+                let firstDay = new Date(year, month, 1).getDay();
+                let daysInMonth = new Date(year, month + 1, 0).getDate();
+                calendar += `\n${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}\n`;
+                calendar += 'Sun Mon Tue Wed Thu Fri Sat\n';
+                calendar += '    '.repeat(firstDay);
+                for (let day = 1; day <= daysInMonth; day++) {
+                    calendar += day.toString().padStart(3, ' ') + ' ';
+                    if ((firstDay + day) % 7 === 0) calendar += '\n';
+                }
+                calendar += '\n';
+            }
+            document.getElementById('calendar').textContent = calendar;
+        }
+    </script>
+</body>
+</html>
