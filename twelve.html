@@ -1,35 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calendar</title>
+<title>Calendar</title>
+<script>
+function Sub()
+{
+year = document.getElementById("year").value;
+let months = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"];
+let days = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
+let calender = year;
+for(let m=0;m<12;m++)
+{
+let firstday = new Date(year,m,1).getDay();
+let daysinmonth = new Date(year,m+1,0).getDate();
+let monthhtml = months[m]+"<table><tr>";
+monthhtml+="<tr>"
+for(let i=0;i<7;i++)
+{
+monthhtml += "<th>"+days[i]+"</th>";
+}
+monthhtml += "</tr><tr>";
+for(let i=0;i<firstday;i++)monthhtml+="<td></td>";
+for(let d=1;d<=daysinmonth;d++){
+if((firstday+d-1)%7==0){monthhtml+="</tr><tr>";}
+monthhtml+="<td>"+d+"</td>";
+}
+calender+=monthhtml+ "</tr></table>";
+}
+document.getElementById("result").innerHTML=calender;
+}
+</script>
 </head>
 <body>
-    <h2>Enter Year to Generate Calendar</h2>
-    <input type="number" id="yearInput" placeholder="Enter Year">
-    <button onclick="generateCalendar()">Show Calendar</button>
-    <pre id="calendar"></pre>
-
-    <script>
-        function generateCalendar() {
-            let year = document.getElementById('yearInput').value;
-            if (!year) return;
-            let calendar = '';
-            for (let month = 0; month < 12; month++) {
-                let firstDay = new Date(year, month, 1).getDay();
-                let daysInMonth = new Date(year, month + 1, 0).getDate();
-                calendar += `\n${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}\n`;
-                calendar += 'Sun Mon Tue Wed Thu Fri Sat\n';
-                calendar += '    '.repeat(firstDay);
-                for (let day = 1; day <= daysInMonth; day++) {
-                    calendar += day.toString().padStart(3, ' ') + ' ';
-                    if ((firstDay + day) % 7 === 0) calendar += '\n';
-                }
-                calendar += '\n';
-            }
-            document.getElementById('calendar').textContent = calendar;
-        }
-    </script>
-</body>
+<center>
+<h3>Calendar</h3><br>
+<input type = "number" value = "Enter the year" id = "year" required>
+<button onclick="Sub()">Submit</button>
+<p id = "result"></p>
 </html>
